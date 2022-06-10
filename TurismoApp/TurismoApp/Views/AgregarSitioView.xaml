@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TurismoApp.Views.AgregarSitioView" Title="Agregar sitio" Background="white">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="https://cdn-icons-png.flaticon.com/512/727/727572.png"
+                     Command="{Binding AgregarCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label Text="Nombre" FontSize="Caption" TextColor="#344955" TextTransform="Uppercase"/>
+            <Entry Text="{Binding Sitio.Nombre}"></Entry>
+
+            <Label Text="Dirección" FontSize="Caption" TextColor="#344955" TextTransform="Uppercase"/>
+            <Entry Text="{Binding Sitio.Dirección}"></Entry>
+            
+            <Label Text="Descripción" FontSize="Caption" TextColor="#344955" TextTransform="Uppercase"/>
+            <Entry Text="{Binding Sitio.Descripcion}"></Entry>
+
+            <Label Text="Imagen (URL)" FontSize="Caption" TextColor="#344955" TextTransform="Uppercase"/>
+            <Entry Text="{Binding Sitio.Imagen}"></Entry>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

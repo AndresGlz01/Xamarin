@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ViewModels="clr-namespace:TurismoApp.ViewModels"
+             x:Class="TurismoApp.Views.SitioView" Title="TurismoApp" Background="white">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="https://cdn-icons-png.flaticon.com/512/727/727570.png"
+                     Command="{Binding CambiarVistaCommand}"
+                     CommandParameter="agregar"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.BindingContext>
+        <ViewModels:SitioViewModel x:Name="SVM"/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ContentView>
+            <ScrollView>
+                <StackLayout>
+                    <CollectionView ItemsSource="{Binding Sitios}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <SwipeView>
+                                    <SwipeView.LeftItems>
+                                        <SwipeItem Text="Editar" BackgroundColor="Blue"
+                                                   IconImageSource="https://cdn-icons-png.flaticon.com/512/1828/1828911.png"
+                                                   Command="{Binding Source={x:Reference SVM}, Path=ModificarCommand}" CommandParameter="{Binding .}"/>
+                                    </SwipeView.LeftItems>
+                                    <SwipeView.RightItems>
+                                        <SwipeItem Text="Eliminar" BackgroundColor="Red" 
+                                                   IconImageSource="https://cdn-icons-png.flaticon.com/512/565/565491.png"
+                                                   Clicked="SwipeItem_Clicked"
+                                                   CommandParameter="{Binding .}"/>
+                                    </SwipeView.RightItems>
+                                    <Grid Margin="5" BackgroundColor="#4A6572">
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference SVM}, Path=VerDetallesCommand}" CommandParameter="{Binding .}"/>
+                                        </Grid.GestureRecognizers>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.3*"/>
+                                            <ColumnDefinition Width="0.7*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="0.3*"/>
+                                            <RowDefinition Height="0.2*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Image Grid.Column="0" Grid.Row="0" Source="{Binding Imagen}"
+                                               Aspect="Fill"
+                                               Grid.RowSpan="3"/>
+
+                                        <Label Grid.Column="1" Grid.Row="0"
+                                               Text="{Binding Nombre}"
+                                               FontSize="Body"
+                                               VerticalOptions="Center"
+                                               TextColor="#f9aa33"/>
+
+                                        <Label Grid.Column="1" Grid.Row="1"
+                                               FontSize="Subtitle"
+                                               Text="{Binding Dirección}" 
+                                               TextColor="#d2d2d2" FontAttributes="Bold"/>
+
+                                        <Label Grid.Column="1" Grid.Row="2"
+                                               Text="{Binding Descripcion}" 
+                                               TextColor="White"/>
+                                    </Grid>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+        </ContentView>
+    </ContentPage.Content>
+
+</ContentPage>
